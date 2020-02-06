@@ -2,124 +2,107 @@ import React from 'react';
 import Game from './Game';
 
 class Tot extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [
-        {
-          squares: Array(9).fill(null)
-        }
-      ],
-      xIsNext: true,
-      stepNumber: 0
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			game: new Array(9).fill(null),
+			xIsNext: true,
+			nextMove: null,
+			status: null,
+		};
+	}
 
-  handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares
-        }
-      ]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
-    });
-  }
+	handleClick(i, squares) {
+		if (calculateWinner(squares) || squares[i]) {
+			return;
+		}
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: step % 2 === 0
-    });
-  }
+		squares[i] = this.state.xIsNext ? 'X' : 'O';
+		this.setState({
+			board: squares,
+			xIsNext: !this.state.xIsNext,
+		});
+		// Create new copies of data
+		if (!this.state.nextMove || this.state.prevMove !== i) {
+			this.setState({ status: 'Invalid move' });
+			return;
+		}
 
-  render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+		const game = this.state.game.slice();
 
-    const moves = history.map((step, move) => {
-      const desc = move ? 'Go to move #' + move : 'Go to game start';
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
+		// Update moves
+		// Update state of the board
+	}
 
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    }
+	render() {
+		if (winner) {
+			status = 'Winner: ' + winner;
+		} else {
+			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+		}
 
-    return (
-      <div>
-        <div className="game">
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-        </div>
-        <div className="game">
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-        </div>
-        <div className="game">
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-          <div className="mar">
-            <Game />
-          </div>
-        </div>
-      </div>
-    );
-  }
+		return (
+			<div>
+				<div className='game'>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+				</div>
+				<div className='game'>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+				</div>
+				<div className='game'>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+					<div className='mar'>
+						<Game />
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
+	const lines = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6],
+	];
+	for (const element of lines) {
+		if (
+			squares[element[0]] &&
+			squares[element[0]] === squares[element[1]] &&
+			squares[element[1]] === squares[element[2]]
+		) {
+			return squares[element[0]];
+		}
+	}
+
+	return null;
 }
 
 export default Tot;
