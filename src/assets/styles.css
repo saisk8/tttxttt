@@ -1,0 +1,120 @@
+body {
+	font: 14px 'Century Gothic', Futura, sans-serif;
+	margin: 20px;
+}
+
+.board-row:after {
+	clear: both;
+	content: '';
+	display: table;
+}
+
+.cell {
+	position: relative;
+	background: #fff;
+	border: 1px solid #999;
+	float: left;
+	font-size: 40px;
+	font-weight: bold;
+	height: 60px;
+	margin-right: -1px;
+	margin-top: -1px;
+	padding: 0px;
+	text-align: center;
+	width: 60px;
+	border-radius: 0;
+	animation-name: circle-to-cell;
+	animation-duration: 0.25s;
+	margin: 1px;
+}
+
+.circle {
+	position: relative;
+	background: #fff;
+	border: 1px solid #999;
+	float: left;
+	font-size: 40px;
+	font-weight: bold;
+	height: 60px;
+	margin-right: -1px;
+	margin-top: -1px;
+	padding: 0px;
+	text-align: center;
+	width: 60px;
+	border-radius: 50%;
+	animation-name: cell-to-circle;
+	animation-duration: 0.25s;
+	margin: 1px;
+}
+
+@keyframes cell-to-circle {
+	0% {
+		border-radius: 0;
+	}
+	100% {
+		border-radius: 50%;
+	}
+}
+
+@keyframes circle-to-cell {
+	0% {
+		border-radius: 50%;
+	}
+	100% {
+		border-radius: 0;
+	}
+}
+
+.highlight {
+	background: #ffecb3;
+}
+
+.x {
+	background: #f44336;
+	border-color: #f44336;
+	color: #fff;
+}
+
+.o {
+	background: #388e3c;
+	border-color: #388e3c;
+	color: #fff;
+}
+
+.d {
+	background: #4e342e;
+	border-color: #4e342e;
+	color: #fff;
+}
+
+.cell:focus {
+	border-color: #d50000;
+	outline: none;
+}
+
+.circle:focus {
+	outline: none;
+	border-color: #d50000;
+}
+
+.game-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.main-game {
+	width: 700px;
+	margin: 0 auto;
+}
+.mar {
+	margin: 20px;
+}
+
+.game-info {
+	margin-left: 20px;
+}
+
+.center {
+	text-align: center;
+	font-size: 30px;
+}
