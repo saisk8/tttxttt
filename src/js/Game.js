@@ -52,7 +52,7 @@ class Game extends React.Component {
 		if (winner) {
 			status = 'Winner: ' + winner;
 		} else {
-			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+			status = 'Current player: ' + (this.state.xIsNext ? 'X' : 'O');
 		}
 		return (
 			<div className='main-game'>
@@ -65,6 +65,7 @@ class Game extends React.Component {
 						</div>
 					);
 				})}
+				<div className='center'>{status}</div>
 			</div>
 		);
 	}
@@ -87,6 +88,10 @@ function calculateWinner(squares) {
 			return squares[a];
 		}
 	}
+	if (
+		squares.reduce((accumulator, currentValue) => accumulator && currentValue)
+	)
+		return 'D';
 	return null;
 }
 
