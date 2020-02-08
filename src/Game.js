@@ -1,7 +1,7 @@
 import React from 'react';
-import Game from './Game';
+import TicTacToe from './TicTacToe';
 
-class Tot extends React.Component {
+class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,7 +29,7 @@ class Tot extends React.Component {
 	renderGame(i) {
 		return (
 			<div className='mar'>
-				<Game
+				<TicTacToe
 					id={i}
 					onClick={(i, j) => this.handleClick(i, j)}
 					squares={this.state.game[i]}
@@ -87,4 +87,4 @@ function calculateWinner(squares) {
 	return null;
 }
 
-export default Tot;
+export default Game;
