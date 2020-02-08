@@ -16,6 +16,8 @@ class TicTacToe extends React.Component {
 			green: this.props.squares[i] === 'O' || this.props.winner === 'O',
 			highlight:
 				this.props.mustPlaceIn === this.props.id && !this.props.squares[i],
+			square: this.props.xIsNext,
+			circle: !this.props.xIsNext,
 		});
 		return (
 			<Square

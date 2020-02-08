@@ -35,6 +35,7 @@ class Game extends React.Component {
 					onClick={(i, j) => this.handleClick(i, j)}
 					squares={this.state.game[i]}
 					mustPlaceIn={this.state.mustPlaceIn}
+					xIsNext={this.state.xIsNext}
 					winner={this.state.game.map(x => calculateWinner(x))[i]}
 				/>
 			</div>
