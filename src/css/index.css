@@ -16,16 +16,16 @@ body {
 	float: left;
 	font-size: 40px;
 	font-weight: bold;
-	height: 70px;
+	height: 60px;
 	margin-right: -1px;
 	margin-top: -1px;
 	padding: 0px;
 	text-align: center;
-	width: 70px;
+	width: 60px;
 	border-radius: 0;
 	animation-name: circle-to-square;
 	animation-duration: 0.25s;
-	margin: 2px;
+	margin: 1px;
 }
 
 .circle {
@@ -35,16 +35,16 @@ body {
 	float: left;
 	font-size: 40px;
 	font-weight: bold;
-	height: 70px;
+	height: 60px;
 	margin-right: -1px;
 	margin-top: -1px;
 	padding: 0px;
 	text-align: center;
-	width: 70px;
+	width: 60px;
 	border-radius: 50%;
 	animation-name: square-to-circle;
 	animation-duration: 0.25s;
-	margin: 2px;
+	margin: 1px;
 }
 
 @keyframes square-to-circle {
@@ -66,19 +66,26 @@ body {
 }
 
 .highlight {
-	background: #607d8d;
+	background: #ffecb3;
 }
 
 .x {
-	background: #0d47a1;
-	border-color: #0d47a1;
+	background: #f44336;
+	border-color: #f44336;
 	color: #fff;
 }
 
 .o {
-	background: #009688;
-	border-color: #009688;
+	background: #388e3c;
+	border-color: #388e3c;
 	color: #fff;
+}
+
+.d {
+	background: #4e342e;
+	border-color: #4e342e;
+	border-radius: 25%;
+	color: #4e342e;
 }
 
 .square:focus {
@@ -101,9 +108,14 @@ body {
 	margin: 0 auto;
 }
 .mar {
-	margin: 5px;
+	margin: 20px;
 }
 
 .game-info {
 	margin-left: 20px;
+}
+
+.center {
+	text-align: center;
+	font-size: 30px;
 }
