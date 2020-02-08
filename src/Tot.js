@@ -5,36 +5,31 @@ class Tot extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			game: new Array(9).fill(null),
+			game: new Array(9).fill(Array(9).fill(null)),
 			xIsNext: true,
-			nextMove: null,
-			status: null,
+			mustPlaceIn: null,
 		};
 	}
 
-	handleClick(i, squares) {
-		if (calculateWinner(squares) || squares[i]) {
-			return;
-		}
-
-		squares[i] = this.state.xIsNext ? 'X' : 'O';
-		this.setState({
-			board: squares,
-			xIsNext: !this.state.xIsNext,
-		});
-		// Create new copies of data
-		if (!this.state.nextMove || this.state.prevMove !== i) {
-			this.setState({ status: 'Invalid move' });
-			return;
-		}
-
+	handleClick(i, j) {
+		const totGame = this.state.game.map(x => calculateWinner(x));
+		if (calculateWinner(totGame)) return;
+		if (this.state.mustPlaceIn && this.state.mustPlaceIn !== j) return;
 		const game = this.state.game.slice();
-
-		// Update moves
-		// Update state of the board
+		game[i][j] = this.state.xIsNext ? 'X' : 'O';
+		this.setState({
+			game: game,
+			xIsNext: !this.state.xIsNext,
+			mustPlaceIn: totGame[j] ? null : j,
+		});
+		return;
 	}
 
 	render() {
+		let status;
+		const winner = calculateWinner(
+			this.state.game.map(x => calculateWinner(x))
+		);
 		if (winner) {
 			status = 'Winner: ' + winner;
 		} else {
@@ -45,37 +40,74 @@ class Tot extends React.Component {
 			<div>
 				<div className='game'>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='0'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[0]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='1'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[1]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='2'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[2]}
+						/>
 					</div>
 				</div>
 				<div className='game'>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='3'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[3]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='4'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[4]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='5'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[5]}
+						/>
 					</div>
 				</div>
 				<div className='game'>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='6'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[6]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='7'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[7]}
+						/>
 					</div>
 					<div className='mar'>
-						<Game />
+						<Game
+							id='8'
+							onClick={(i, j) => this.handleClick(i, j)}
+							squares={this.state.game[8]}
+						/>
 					</div>
 				</div>
+				<div className='game-info'>{status}</div>
 			</div>
 		);
 	}
@@ -92,16 +124,12 @@ function calculateWinner(squares) {
 		[0, 4, 8],
 		[2, 4, 6],
 	];
-	for (const element of lines) {
-		if (
-			squares[element[0]] &&
-			squares[element[0]] === squares[element[1]] &&
-			squares[element[1]] === squares[element[2]]
-		) {
-			return squares[element[0]];
+	for (let i = 0; i < lines.length; i++) {
+		const [a, b, c] = lines[i];
+		if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+			return squares[a];
 		}
 	}
-
 	return null;
 }
 
