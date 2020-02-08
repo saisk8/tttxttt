@@ -49,7 +49,9 @@ class Game extends React.Component {
 		const winner = calculateWinner(
 			this.state.game.map(x => calculateWinner(x))
 		);
-		if (winner) {
+		if (winner === 'Draw') {
+			status = 'Draw';
+		} else if (winner) {
 			status = 'Winner: ' + winner;
 		} else {
 			status = 'Current player: ' + (this.state.xIsNext ? 'X' : 'O');
