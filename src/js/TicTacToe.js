@@ -12,12 +12,12 @@ function Square(props) {
 class TicTacToe extends React.Component {
 	renderSquare(i) {
 		const squareClasses = classNames('square', {
-			red: this.props.squares[i] === 'X' || this.props.winner === 'X',
-			green: this.props.squares[i] === 'O' || this.props.winner === 'O',
+			x: this.props.squares[i] === 'X' || this.props.winner === 'X',
+			o: this.props.squares[i] === 'O' || this.props.winner === 'O',
 			highlight:
 				this.props.mustPlaceIn === this.props.id && !this.props.squares[i],
-			square: this.props.xIsNext,
-			circle: !this.props.xIsNext,
+			square: this.props.xIsNext || this.props.winner === 'X',
+			circle: !this.props.xIsNext || this.props.winner === 'O',
 		});
 		return (
 			<Square

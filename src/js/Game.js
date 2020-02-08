@@ -55,7 +55,7 @@ class Game extends React.Component {
 			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 		}
 		return (
-			<div>
+			<div className='main-game'>
 				{[...new Array(rows)].map((x, rowIndex) => {
 					return (
 						<div className='game'>
@@ -65,7 +65,6 @@ class Game extends React.Component {
 						</div>
 					);
 				})}
-				<div>{status}</div>
 			</div>
 		);
 	}

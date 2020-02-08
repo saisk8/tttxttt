@@ -14,14 +14,14 @@ body {
 	background: #fff;
 	border: 1px solid #999;
 	float: left;
-	font-size: 24px;
+	font-size: 40px;
 	font-weight: bold;
-	height: 34px;
+	height: 70px;
 	margin-right: -1px;
 	margin-top: -1px;
 	padding: 0px;
 	text-align: center;
-	width: 34px;
+	width: 70px;
 	border-radius: 0;
 	animation-name: circle-to-square;
 	animation-duration: 0.25s;
@@ -33,14 +33,14 @@ body {
 	background: #fff;
 	border: 1px solid #999;
 	float: left;
-	font-size: 24px;
+	font-size: 40px;
 	font-weight: bold;
-	height: 34px;
+	height: 70px;
 	margin-right: -1px;
 	margin-top: -1px;
 	padding: 0px;
 	text-align: center;
-	width: 34px;
+	width: 70px;
 	border-radius: 50%;
 	animation-name: square-to-circle;
 	animation-duration: 0.25s;
@@ -66,29 +66,29 @@ body {
 }
 
 .highlight {
-	background: #ff8;
+	background: #607d8d;
 }
 
-.red {
-	background: red;
+.x {
+	background: #0d47a1;
+	border-color: #0d47a1;
 	color: #fff;
 }
 
-.black {
-	background: black;
-}
-
-.green {
-	background: green;
+.o {
+	background: #009688;
+	border-color: #009688;
 	color: #fff;
 }
 
 .square:focus {
+	border-color: #d50000;
 	outline: none;
 }
 
-.kbd-navigation .square:focus {
-	background: #ddd;
+.circle:focus {
+	outline: none;
+	border-color: #d50000;
 }
 
 .game {
@@ -96,6 +96,10 @@ body {
 	flex-direction: row;
 }
 
+.main-game {
+	width: 700px;
+	margin: 0 auto;
+}
 .mar {
 	margin: 5px;
 }
