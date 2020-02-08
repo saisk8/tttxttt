@@ -26,7 +26,21 @@ class Tot extends React.Component {
 		return;
 	}
 
+	renderGame(i) {
+		return (
+			<div className='mar'>
+				<Game
+					id={i}
+					onClick={(i, j) => this.handleClick(i, j)}
+					squares={this.state.game[i]}
+				/>
+			</div>
+		);
+	}
+
 	render() {
+		const rows = 3;
+		const columns = 3;
 		let status;
 		const winner = calculateWinner(
 			this.state.game.map(x => calculateWinner(x))
@@ -36,79 +50,18 @@ class Tot extends React.Component {
 		} else {
 			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 		}
-
 		return (
 			<div>
-				<div className='game'>
-					<div className='mar'>
-						<Game
-							id={0}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[0]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={1}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[1]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={2}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[2]}
-						/>
-					</div>
-				</div>
-				<div className='game'>
-					<div className='mar'>
-						<Game
-							id={3}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[3]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={4}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[4]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={5}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[5]}
-						/>
-					</div>
-				</div>
-				<div className='game'>
-					<div className='mar'>
-						<Game
-							id={6}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[6]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={7}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[7]}
-						/>
-					</div>
-					<div className='mar'>
-						<Game
-							id={8}
-							onClick={(i, j) => this.handleClick(i, j)}
-							squares={this.state.game[8]}
-						/>
-					</div>
-				</div>
-				<div className='game-info'>{status}</div>
+				{[...new Array(rows)].map((x, rowIndex) => {
+					return (
+						<div className='game'>
+							{[...new Array(columns)].map((y, colIndex) =>
+								this.renderGame(rowIndex * columns + colIndex)
+							)}
+						</div>
+					);
+				})}
+				<div>{status}</div>
 			</div>
 		);
 	}
