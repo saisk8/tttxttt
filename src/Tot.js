@@ -5,17 +5,18 @@ class Tot extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			game: new Array(9).fill(Array(9).fill(null)),
+			game: new Array(9).fill(new Array(9).fill(null)),
 			xIsNext: true,
 			mustPlaceIn: null,
+			status: null,
 		};
 	}
 
 	handleClick(i, j) {
 		const totGame = this.state.game.map(x => calculateWinner(x));
-		if (calculateWinner(totGame)) return;
-		if (this.state.mustPlaceIn && this.state.mustPlaceIn !== j) return;
-		const game = this.state.game.slice();
+		if (calculateWinner(totGame) || this.state.game[i][j]) return;
+		if (this.state.mustPlaceIn !== null && this.state.mustPlaceIn !== i) return;
+		const game = this.state.game.map(x => x.slice());
 		game[i][j] = this.state.xIsNext ? 'X' : 'O';
 		this.setState({
 			game: game,
@@ -41,21 +42,21 @@ class Tot extends React.Component {
 				<div className='game'>
 					<div className='mar'>
 						<Game
-							id='0'
+							id={0}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[0]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='1'
+							id={1}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[1]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='2'
+							id={2}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[2]}
 						/>
@@ -64,21 +65,21 @@ class Tot extends React.Component {
 				<div className='game'>
 					<div className='mar'>
 						<Game
-							id='3'
+							id={3}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[3]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='4'
+							id={4}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[4]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='5'
+							id={5}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[5]}
 						/>
@@ -87,21 +88,21 @@ class Tot extends React.Component {
 				<div className='game'>
 					<div className='mar'>
 						<Game
-							id='6'
+							id={6}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[6]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='7'
+							id={7}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[7]}
 						/>
 					</div>
 					<div className='mar'>
 						<Game
-							id='8'
+							id={8}
 							onClick={(i, j) => this.handleClick(i, j)}
 							squares={this.state.game[8]}
 						/>
