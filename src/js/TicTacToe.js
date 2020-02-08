@@ -1,17 +1,25 @@
 import React from 'react';
 import '../css/index.css';
+const classNames = require('classnames');
 
 function Square(props) {
 	return (
-		<button className='square' onClick={props.onClick}>
+		<button className={props.css} onClick={props.onClick}>
 			{props.value}
 		</button>
 	);
 }
 class TicTacToe extends React.Component {
 	renderSquare(i) {
+		const squareClasses = classNames('square', {
+			red: this.props.squares[i] === 'X' || this.props.winner === 'X',
+			green: this.props.squares[i] === 'O' || this.props.winner === 'O',
+			highlight:
+				this.props.mustPlaceIn === this.props.id && !this.props.squares[i],
+		});
 		return (
 			<Square
+				css={squareClasses}
 				value={this.props.squares[i]}
 				onClick={() => this.props.onClick(this.props.id, i)}
 			/>

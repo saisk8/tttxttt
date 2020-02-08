@@ -13,11 +13,12 @@ class Game extends React.Component {
 	}
 
 	handleClick(i, j) {
-		const totGame = this.state.game.map(x => calculateWinner(x));
-		if (calculateWinner(totGame) || this.state.game[i][j]) return;
+		let totGame = this.state.game.map(x => calculateWinner(x));
+		if (calculateWinner(totGame) || totGame[i] || this.state.game[i][j]) return;
 		if (this.state.mustPlaceIn !== null && this.state.mustPlaceIn !== i) return;
 		const game = this.state.game.map(x => x.slice());
 		game[i][j] = this.state.xIsNext ? 'X' : 'O';
+		totGame = game.map(x => calculateWinner(x));
 		this.setState({
 			game: game,
 			xIsNext: !this.state.xIsNext,
@@ -33,6 +34,8 @@ class Game extends React.Component {
 					id={i}
 					onClick={(i, j) => this.handleClick(i, j)}
 					squares={this.state.game[i]}
+					mustPlaceIn={this.state.mustPlaceIn}
+					winner={this.state.game.map(x => calculateWinner(x))[i]}
 				/>
 			</div>
 		);
