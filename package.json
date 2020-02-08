@@ -16,7 +16,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"postbuild": "mv build/* docs/"
+		"postbuild": "mv build/* docs/",
+		"homepage": "https://somanath.github.io/tttxttt"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
