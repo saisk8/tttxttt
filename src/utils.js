@@ -21,7 +21,10 @@ export const getWinner = cells => {
 	return allCellsNotFilled ? null : 'D';
 };
 
-export const renderBoard = ({ rows, columns }, { renderer, boardClassName, rowClassName }) => {
+export const renderBoard = (
+	{ rows, columns },
+	{ renderer, boardClassName, rowClassName }
+) => {
 	const fillTTTsInGameRow = (rowIdx, columns) => {
 		const gameRow = [];
 		for (let colIdx = 0; colIdx < columns; colIdx++) {
@@ -33,15 +36,7 @@ export const renderBoard = ({ rows, columns }, { renderer, boardClassName, rowCl
 
 	const gameRows = [];
 	for (let rowIdx = 0; rowIdx < rows; rowIdx++) {
-		gameRows.push(
-			<div key={rowIdx} className={rowClassName}>
-				{fillTTTsInGameRow(rowIdx, columns)}
-			</div>
-		);
+		gameRows.push(fillTTTsInGameRow(rowIdx, columns));
 	}
-	return (
-		<div className={boardClassName}>
-			{gameRows}
-		</div>
-	);
+	return gameRows.flat();
 };

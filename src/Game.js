@@ -18,21 +18,22 @@ export default class Game extends React.Component {
 		};
 	}
 
-	handleClick = (tttIndex, cellIndex) => {	
+	handleClick = (tttIndex, cellIndex) => {
 		// Do nothing if...
 		if (
 			this.state.totWinner || // entire game is won
 			this.state.reducedBoard[tttIndex] || // tttIndex board is won
 			this.state.game[tttIndex][cellIndex] || // something is placed already in the cell
 			(this.state.mustPlaceIn !== null && this.state.mustPlaceIn !== tttIndex) // invalid move
-		) return;
-		
+		)
+			return;
+
 		const newGameState = this.state.game.map(ttt => [...ttt]);
 		const newReducedBoardState = [...this.state.reducedBoard];
 		const newCurrentPlayer = this.state.xIsCurrent ? 'O' : 'X';
 
 		newGameState[tttIndex][cellIndex] = this.state.xIsCurrent ? 'X' : 'O';
-		newReducedBoardState[tttIndex] = getWinner(newGameState[tttIndex])
+		newReducedBoardState[tttIndex] = getWinner(newGameState[tttIndex]);
 		const newTotWinner = getWinner(newReducedBoardState);
 
 		let gameStatus = `${newCurrentPlayer}'s Turn`;
@@ -56,7 +57,7 @@ export default class Game extends React.Component {
 			mustPlaceIn: newReducedBoardState[cellIndex] ? null : cellIndex,
 			gameStatus,
 		});
-	}
+	};
 
 	renderTTT = tttIndex => (
 		<TicTacToe
@@ -72,19 +73,21 @@ export default class Game extends React.Component {
 
 	render() {
 		return (
-			<>
-				{renderBoard(
-					{ rows: 3, columns: 3 },
-					{
-						renderer: this.renderTTT,
-						boardClassName: 'main-game',
-						rowClassName: 'game-row',
-					},
-				)}
-				<div className='center'>{this.state.gameStatus}</div>
-			</>
+			<div className='container full-height center-all'>
+				<div className='game-wrapper'>
+					<div className='game-info'>{this.state.gameStatus}</div>
+					<div className='big-board'>
+						{renderBoard(
+							{ rows: 3, columns: 3 },
+							{
+								renderer: this.renderTTT,
+								boardClassName: 'main-game',
+								rowClassName: 'game-row',
+							}
+						)}
+					</div>
+				</div>
+			</div>
 		);
 	}
 }
-
-

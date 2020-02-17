@@ -13,16 +13,15 @@ function Cell({ className, onClick, value }) {
 export default class TicTacToe extends React.Component {
 	renderCell = cellIdx => {
 		const cellClasses = classNames('cell', {
-			x:
-				this.props.winner === 'X' ||
-				(!this.props.winner && this.props.cells[cellIdx] === 'X'),
-			o:
-				this.props.winner === 'O' ||
-				(!this.props.winner && this.props.cells[cellIdx] === 'O'),
+			'x-win': this.props.winner === 'X',
+			'o-win': this.props.winner === 'O',
+			x: !this.props.winner && this.props.cells[cellIdx] === 'X',
+			o: !this.props.winner && this.props.cells[cellIdx] === 'O',
 			d: this.props.winner === 'D',
 			highlight:
 				(this.props.mustPlaceIn === null && !this.props.cells[cellIdx]) ||
-				(this.props.mustPlaceIn === this.props.id && !this.props.cells[cellIdx]),
+				(this.props.mustPlaceIn === this.props.id &&
+					!this.props.cells[cellIdx]),
 		});
 		return (
 			<Cell
@@ -32,18 +31,18 @@ export default class TicTacToe extends React.Component {
 				onClick={() => this.props.onClick(this.props.id, cellIdx)}
 			/>
 		);
-	}
+	};
 
 	render() {
 		return (
-			<div className='mar'>
+			<div className='small-board'>
 				{renderBoard(
 					{ rows: 3, columns: 3 },
 					{
 						renderer: this.renderCell,
 						boardClassName: 'game-board',
 						rowClassName: 'board-row',
-					},
+					}
 				)}
 			</div>
 		);
