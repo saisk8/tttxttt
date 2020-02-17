@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const getWinner = cells => {
 	const winPatterns = [
 		[0, 1, 2],
