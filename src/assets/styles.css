@@ -1,3 +1,7 @@
+body {
+	background: #fffcf9;
+}
+
 .cell {
 	display: flex;
 	justify-content: center;
@@ -108,7 +112,7 @@
 
 @media only screen and (min-width: 500px) {
 	.game-wrapper {
-		font-size: 16px;
+		font-size: 12px;
 	}
 }
 
