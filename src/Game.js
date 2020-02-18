@@ -3,6 +3,7 @@ import './assets/styles.css';
 
 import TicTacToe from './components/TicTacToe';
 import { getWinner, renderBoard } from './utils';
+import classNames from 'classnames';
 
 export default class Game extends React.Component {
 	constructor(props) {
@@ -72,10 +73,20 @@ export default class Game extends React.Component {
 	);
 
 	render() {
+		const btnClasses = classNames('game-button', {
+			hide: !this.state.totWinner,
+		});
+		const statusClasses = classNames('game-info', {
+			blue: this.state.xIsCurrent,
+			red: !this.state.xIsCurrent,
+		});
 		return (
 			<div className='container full-height center-all'>
 				<div className='game-wrapper'>
-					<div className='game-info'>{this.state.gameStatus}</div>
+					<div className={statusClasses}>{this.state.gameStatus}</div>
+					<div className={btnClasses}>
+						<button className='btn btn-raised'>Restart</button>
+					</div>
 					<div className='big-board'>
 						{renderBoard(
 							{ rows: 3, columns: 3 },
