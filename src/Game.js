@@ -5,19 +5,23 @@ import TicTacToe from './components/TicTacToe';
 import { getWinner, renderBoard } from './utils';
 import classNames from 'classnames';
 
+const intialState = {
+	game: new Array(9).fill(new Array(9).fill(null)),
+	// Reduced ttt x ttt (a.k.a. tot); in the form of a ttt
+	reducedBoard: new Array(9).fill(null),
+	xIsCurrent: true,
+	mustPlaceIn: null,
+	totWinner: null,
+	gameStatus: "X's Turn",
+};
 export default class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			game: new Array(9).fill(new Array(9).fill(null)),
-			// Reduced ttt x ttt (a.k.a. tot); in the form of a ttt
-			reducedBoard: new Array(9).fill(null),
-			xIsCurrent: true,
-			mustPlaceIn: null,
-			totWinner: null,
-			gameStatus: "X's Turn",
-		};
+		this.state = intialState;
 	}
+	reset = () => {
+		this.setState(intialState);
+	};
 
 	handleClick = (tttIndex, cellIndex) => {
 		// Do nothing if...
@@ -85,7 +89,9 @@ export default class Game extends React.Component {
 				<div className='game-wrapper'>
 					<div className={statusClasses}>{this.state.gameStatus}</div>
 					<div className={btnClasses}>
-						<button className='btn btn-raised'>Restart</button>
+						<button className='btn btn-raised' onClick={this.reset}>
+							Restart
+						</button>
 					</div>
 					<div className='big-board'>
 						{renderBoard(
